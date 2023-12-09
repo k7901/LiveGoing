@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 ml-5 mb-5 public-new-title text-center">
+      <h1>新規会員登録</h1>
+    </div>
+  </div>
+  <%= form_with model:@customer,url: registration_path(resource_name) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-4">名前</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.label :姓 %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control" %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.label :名 %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-4">フリガナ</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.label :セイ %>
+        <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", class: "form-control" %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.label :メイ %>
+        <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <%= f.label :メールアドレス %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+          <%= f.label :住所 %>
+      </div>
+      <div class="col-6 form-group">
+        <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+          <%= f.label :生年月日 %>
+      </div>
+      <div class="col-6 form-group">
+        <%= f.date_select :birthday, use_month_numbers: true,start_year: 1950, end_year: (Time.now.year), default: Date.new(1980, 1, 1),autofocus: true, autocomplete: "birthday", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <%= f.label :電話番号 %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <%= f.label :パスワード（６文字以上） %>
+        <% if @minimum_password_length %>
+        <% end %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <%= f.label :パスワード（確認用） %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group offset-3">
+        <%= f.submit "新規登録", class: "btn font-bold ", style: "background-color: #e2eda8;" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-row">
+    <div class="col-6 form-group mt-5 ml-5">
+      <h1>既に会員済みの方</h1>
+    </div>
+  </div>
+  <div class="form-row justify-content-center">
+    <div class="col-4 form-group mt-1 ml-3">
+        <span class="marker-P-green">
+          <%= link_to "こちら", new_customer_session_path %></span>
+          からログインしてください。
+    </div>
+  </div>
+</div>

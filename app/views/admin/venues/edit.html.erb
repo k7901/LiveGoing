@@ -1,2 +1,19 @@
-<h1>Admin::Venues#edit</h1>
-<p>Find me in app/views/admin/venues/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>会場編集画面</div>
+    <div>
+      <%= form_with model: @venue, url: admin_venue_path, local:true do |f|  %>
+        <div><%= f.label :"会場名" %></div>
+        <div><%= f.text_field :name %></div>
+        <div><%= f.label :"緯度" %></div>
+        <div><%= f.text_field :latitude %></div>
+        <div><%= f.label :"経度" %></div>
+        <div><%= f.text_field :longitude %></div>
+        <div><%= f.label :"都道府県" %></div>
+        <div><%= f.collection_select :prefecture_id, @prefectures, :id, :name,
+                { include_blank: "-- 選択してください --" }, { required: true, class: "form-control", id: "prefecture-select" } %></div>
+        <div><%= f.submit "変更を保存", class: "btn btn-lg" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>

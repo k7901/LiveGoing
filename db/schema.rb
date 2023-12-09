@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2023_12_08_135108) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -40,9 +39,6 @@ ActiveRecord::Schema.define(version: 2023_12_08_135108) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
-=======
-ActiveRecord::Schema.define(version: 2023_12_08_081433) do
->>>>>>> origin/develop
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -156,7 +152,6 @@ ActiveRecord::Schema.define(version: 2023_12_08_081433) do
   create_table "venues", force: :cascade do |t|
     t.integer "prefecture_id", null: false
     t.string "name", null: false
-    t.string "address", null: false
     t.decimal "latitude", null: false
     t.decimal "longitude", null: false
     t.datetime "created_at", precision: 6, null: false
