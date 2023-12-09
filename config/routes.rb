@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         patch 'withdraw' => 'booking#withdraw'
       end
     end
-    resources :reviews
+    resources :comments
   end
 
 end

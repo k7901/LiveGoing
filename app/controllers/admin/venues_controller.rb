@@ -25,11 +25,17 @@ class Admin::VenuesController < ApplicationController
     @venue.update(venue_params)
     redirect_to admin_venues_path
   end
-
+  
+  def destroy
+    @venue = Venue.find(params[:id])
+    @venue.destroy
+    redirect_to admin_venues_path
+  end
+  
   private
 
   def venue_params
-    params.require(:venue).permit(:name, :latitude, :longitude, :prefecture_id )
+    params.require(:venue).permit(:name, :latitude, :longitude, :prefecture_id , :id)
   end
 
 end
