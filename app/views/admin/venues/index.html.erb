@@ -11,6 +11,7 @@
         <td><%= venue.name %></td>
         <td><%= venue.prefecture.name %></td>
         <td><%= link_to "編集する", edit_admin_venue_path(venue.id), class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+        <td><%= link_to '削除する', admin_venue_path(venue.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
       </tr>
     <% end %>
     </tr>
