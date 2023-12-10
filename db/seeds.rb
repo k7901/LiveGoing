@@ -68,3 +68,8 @@ kyushu.prefectures.find_or_create_by(name: '熊本')
 kyushu.prefectures.find_or_create_by(name: '宮崎')
 kyushu.prefectures.find_or_create_by(name: '鹿児島')
 kyushu.prefectures.find_or_create_by(name: '沖縄')
+
+Admin.create!(
+   email: 'live@going.com',
+   password: '123456',
+)
