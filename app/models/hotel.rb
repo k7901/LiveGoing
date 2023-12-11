@@ -1,5 +1,7 @@
 class Hotel < ApplicationRecord
   has_one_attached :image
+  belongs_to :services
+  has_many :rooms
 
   def get_image
     unless image.attached?

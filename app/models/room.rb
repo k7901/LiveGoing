@@ -1,4 +1,5 @@
 class Room < ApplicationRecord
+  belongs_to :hotel
   has_one_attached :image
 
   def get_image

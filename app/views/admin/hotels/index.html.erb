@@ -1,0 +1,22 @@
+<div class="pt-4">
+  <%= link_to "新規登録", new_admin_hotel_path, class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
+  <table class = "table table-hover">
+    <thead>
+      <tr class="active">
+        <th>ホテル</th>
+        <th>説明</th>
+        <th>ホテル</th>
+        <th>説明</th>
+      </tr>
+    </thead>
+    <% @hotels.each do |hotel| %>
+      <tr>
+        <td><%= hotel.name %></td>
+        <td><%= hotel.introduction %></td>
+        <td><%= link_to "編集する", edit_admin_venue_path(venue.id), class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+        <td><%= link_to '削除する', admin_venue_path(venue.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+      </tr>
+    <% end %>
+    </tr>
+  </table>
+</div>
