@@ -1,2 +1,89 @@
-<h1>Admin::Hotels#edit</h1>
-<p>Find me in app/views/admin/hotels/edit.html.erb</p>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-12">
+      <h2 class="text-center", style="color: #48120E">
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+          ホテル情報編集
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+      </h2>
+    </div>
+    <div class = "row justify-content-center pt-5">
+      <div class = "col-12">
+        <div>
+          <%= form_with model: @hotel, url: admin_hotel_path(@hotel.id), local:true do |f| %>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label "ホテル画像" %>
+              </div>
+              <div class="col-7 px-0">
+              <%= f.file_field :image, class: "form-control-file image", accept: 'image/*' %>
+              </div>
+            </div>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label :"ホテル名" %>
+              </div>
+              <div class="col-7 px-0">
+                <%= f.text_field :name, class: 'form-control hotel_name' %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3">
+                 <%= f.label :"ホテル説明" %>
+              </div>
+              <div class="col-7 px-0">
+                 <%= f.text_area :introduction, class: 'form-control hotel_introduction',:size=>"40x8"  %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3">
+                 <%= f.label :"住所" %>
+              </div>
+              <div class="col-7 px-0">
+                 <%= f.text_field :address, class: 'form-control hotel_address' %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"緯度" %></div>
+              <div class="col-7 px-0"><%= f.text_field :latitude %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"経度" %></div>
+              <div class="col-7 px-0"><%= f.text_field :longitude %></div>
+            </div>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label :"会場" %>
+              </div>
+              <div class="col-7 px-0">
+                <%= f.select :venue_id, options_for_select(@venues.map { |venue| [venue.name, venue.id] }),
+                { include_blank: "-- 選択してください --" }, {required: true, class: +"form-control", id: "venue-select" } %>
+              </div>
+            </div>
+            <div class='form-group'>
+              <%= f.collection_check_boxes(:service_ids, Service.all, :id, :name) do |service| %>
+                <div class='form-check'>
+                  <%= service.label class: 'form-check-label' do %>
+                    <%= service.check_box class: 'form-check-input' %>
+                    <%= service.text %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            </div>
+            <div class="row my-lg-2 justify-content-md-center ">
+              <div class="col-4">
+                <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
+                  <div style="background-color: #bee6d8; border-radius: 5px;">
+                    <%= f.submit "変更", class: 'btn btn-lg' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

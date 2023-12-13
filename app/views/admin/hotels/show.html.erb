@@ -1,2 +1,68 @@
-<h1>Admin::Hotels#show</h1>
-<p>Find me in app/views/admin/hotels/show.html.erb</p>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-4">
+      <div><%= image_tag @hotel.get_image(300,300) %></div>
+    </div>
+    <div class = "col-8">
+      <div class = "row my-lg-1">
+        <div class = col-3 , style="color: #48120E">
+          ホテル名
+        </div>
+        <div class = "col-lg-9", style="color: #48120E">
+          <h5><%= @hotel.name %></h5>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          ホテル説明
+        </div>
+        <div class = "col-9", style="color: #48120E">
+          <h5><%= @hotel.introduction %></h5>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          住所
+        </div>
+        <div class = "col-9 fs-4", style="color: #48120E">
+          <%= @hotel.address %>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          会場
+        </div>
+        <div class = col-9, style="color: #48120E">
+          <%= @hotel.venue.name %>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          サービス
+        </div>
+        <div class = col-9, style="color: #48120E">
+          <% @hotel.services.each do |service|%>
+            <%= service.name %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <div class = "container">
+    <div class = "row my-lg-2 justify-content-center", style="color: #48120E">
+      <div class = "col-md-3">
+        <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
+          <div style="background-color: #bee6d8; border-radius: 5px;">
+            <%= link_to '編集する', edit_admin_hotel_path(@hotel), class: "btn btn-lg" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "container">
+  <div class = "row">
+    <div>
+
+    </div>
+  </div>
+</div>
