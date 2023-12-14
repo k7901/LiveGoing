@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_08_135108) do
+ActiveRecord::Schema.define(version: 2023_12_11_151413) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,9 +106,15 @@ ActiveRecord::Schema.define(version: 2023_12_08_135108) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "hotel_service_relations", force: :cascade do |t|
+    t.integer "hotel_id", null: false
+    t.integer "service_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "hotels", force: :cascade do |t|
     t.integer "venue_id", null: false
-    t.integer "service_id", null: false
     t.string "name", null: false
     t.text "introduction", null: false
     t.string "address", null: false

@@ -1,2 +1,27 @@
-<h1>Admin::Hotels#index</h1>
-<p>Find me in app/views/admin/hotels/index.html.erb</p>
+<div class="pt-4">
+  <%= link_to "新規登録", new_admin_hotel_path, class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
+  <table class = "table table-hover">
+    <thead>
+      <tr>
+        <th>ホテル</th>
+        <th>説明</th>
+        <th>住所</th>
+        <th>付近の会場</th>
+        <th>サービス</th>
+      </tr>
+    </thead>
+    <% @hotels.each do |hotel| %>
+      <tr>
+        <td><%= link_to admin_hotel_path(hotel.id) do %><%= hotel.name %><% end %></td>
+        <td><%= hotel.introduction %></td>
+        <td><%= hotel.address %></td>
+        <td><%= hotel.venue.name %></td>
+        <td><% hotel.services.each do |service|%>
+            <%= service.name %>
+          <% end %>
+        </td>
+        <td><%= link_to "削除", admin_hotel_path(hotel.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
