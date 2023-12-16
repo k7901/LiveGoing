@@ -7,6 +7,8 @@ class CreateHotels < ActiveRecord::Migration[6.1]
       t.string :address, null: false
       t.decimal :latitude, null: false
       t.decimal :longitude, null: false
+      t.time :check_in_time, null: false
+      t.time :check_out_time, null: false
       t.timestamps
     end
   end

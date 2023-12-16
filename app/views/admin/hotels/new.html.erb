@@ -1,16 +1,11 @@
 <div class = "container">
-  <div class = ""><!--rowを入れるとレイアウトがおかしくなる-->
+  <div class = "">
     <div class = "col-12">
-      <div style=" color: white; background: #cbe6be; padding: 7px; border: 2px dashed rgba(255 , 255 , 255 , 0.5);
-                    -moz-border-radius: 6px; -moz-box-shadow: 0 0 0 5px #cbe6be , 0 2px 3px 5px rgba(0 , 0 , 0 , 0.5);
-                    -webkit-border-radius: 6px; -webkit-box-shadow: 0 0 0 5px #cbe6be , 0 2px 3px 5px rgba(0 , 0 , 0 , 0.5);
-                    border-radius: 6px; box-shadow: 0 0 0 5px #cbe6be , 0 2px 3px 5px rgba(0 , 0 , 0 , 0.5); ">
-        <h2 class="text-center", style="color: #48120E">
-          <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
-            ホテル新規登録
-          <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
-        </h2>
-      </div>
+      <h2 class="text-center", style="color: #48120E">
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+          ホテル新規登録
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+      </h2>
     </div>
     <div class = "row justify-content-center pt-5">
       <div class = "col-md-6">
@@ -21,7 +16,7 @@
                 <%= f.label "ホテル画像" %>
               </div>
               <div class="col-7 px-0">
-              <%= f.file_field :item_image, class: "form-control-file item_image", accept: 'image/*' %>
+              <%= f.file_field :images, multiple: true, class: "form-control-file image", accept: 'image/*' %>
               </div>
             </div>
             <div class="row my-lg-2">
@@ -64,6 +59,14 @@
                 <%= f.select :venue_id, options_for_select(@venues.map { |venue| [venue.name, venue.id] }),
                 { include_blank: "-- 選択してください --" }, {required: true, class: +"form-control", id: "venue-select" } %>
               </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"チェックイン" %></div>
+              <div class="col-7 px-0"><%= f.text_field :check_in_time %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"チェックアウト" %></div>
+              <div class="col-7 px-0"><%= f.text_field :check_out_time %></div>
             </div>
             <div class='form-group'>
               <%= f.collection_check_boxes(:service_ids, Service.all, :id, :name) do |service| %>

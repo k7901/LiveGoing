@@ -3,7 +3,7 @@ class Hotel < ApplicationRecord
   has_many :services, through: :hotel_service_relations
   has_many :rooms
   belongs_to :venue
-  has_one_attached :image
+  has_many_attached :images
 
 
 

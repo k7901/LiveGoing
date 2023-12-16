@@ -43,7 +43,7 @@ class Admin::HotelsController < ApplicationController
    private
 
   def hotel_params
-    params.require(:hotel).permit(:venue_id, :image, :name,:introduction, :address, :latitude, :longitude, service_ids: [])
+    params.require(:hotel).permit(:venue_id, :images[], :name,:introduction, :address, :latitude, :longitude, :check_in_time, :check_out_time, service_ids: [])
   end
 
 end

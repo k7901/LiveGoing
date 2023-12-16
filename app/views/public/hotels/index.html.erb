@@ -1,2 +1,5 @@
-<h1>Public::Hotels#index</h1>
-<p>Find me in app/views/public/hotels/index.html.erb</p>
+<% @hotels.each do |hotel| %>
+  <p><%= image_tag hotel.get_image(100,100) %></p>
+  <p><%= link_to hotel_path(hotel.id) do %><%= hotel.name %><% end %></p>
+  <p><%#= hotel.rooms.checklist %></p>
+<% end %>
