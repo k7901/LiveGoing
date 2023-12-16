@@ -1,40 +1,52 @@
 class Admin::RoomsController < ApplicationController
   def new
+    @hotel = Hotel.find(params[:hotel_id])
     @room = Room.new
   end
-  
+
   def create
-    @room = Room.new(room_params)
-    @room.save
-    redirect_to admin_room_path(@room.id)
-  end
-  
-  def index
-    @rooms = Room.all
+    @hotel = Hotel.find(params[:hotel_id])
+    @room = @hotel.rooms.new(room_params)
+    if @room.save
+      redirect_to admin_hotel_path( @hotel)
+    else
+      render :new
+    end
   end
 
   def show
-    @room = Room.find(params[:id])
+    @hotel = Hotel.find(params[:hotel_id])
+    @room = @hotel.rooms.find(params[:id])
   end
 
   def edit
+    @hotel = Hotel.find(params[:hotel_id])
     @room = Room.find(params[:id])
   end
-  
+
   def update
-    
+    @hotel = Hotel.find(params[:hotel_id])
+    @room = @hotel.rooms.find(params[:id])
+    if @room.update(room_params)
+      redirect_to admin_hotel_room_path(@hotel,@room)
+    else
+      render :edit
+    end
   end
-  
+
   def destroy
-    
+    @hotel = Hotel.find(params[:hotel_id])
+    @room = @hotel.rooms.find(params[:id])
+    @room.destroy
+    redirect_to admin_hotel_room_path(@hotel,@room)
   end
-  
+
    private
 
   def room_params
-    params.require(:room).permit(:room_id, :image, :name, :introduction, :checklist, :price, :capacity, :amount )
+    params.require(:room).permit(:room_id, :hotel_id, :image, :name, :introduction, :checklist, :price, :capacity, :amount )
   end
-  
+
 end
 
-   
+

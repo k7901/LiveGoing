@@ -1,22 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="fixed-top p-2", style = "background-color: #4d382e;">
+    <div class="fixed-top p-2">
       <div class="d-flex content-between align-items-center md-4 ">
         <div class="btn-group">
-      　   <div style="border: 2px solid #fdeff2; padding: 2px; border-radius: 5px; text-align: center;">
-            <div style="background-color: #fdeff2; border-radius: 5px;">
-              <%= link_to root_path, class: "btn font-bold", class: "header-logo" do %>
-                Live Going
-              <% end %>
-            </div>
-          </div>
+          <%= link_to root_path, class: "btn font-bold", class: "header-logo" do %>
+            <h2><strong>Live Going</strong></h2>
+          <% end %>
         </div>
         <div class="btn-group ml-auto">
           <nav class="d-flex align-items-center">
             <ul class="navbar-nav list-group-horizontal ">
               <% if customer_signed_in? %>
                 <% if customer_signed_in? && current_customer.present? %>
-                  <div class="text-warning ml-4 mt-2"><%= "ようこそ、#{current_customer.last_name}さん！" %></div>
+
                 <% end %>
                 <div style="border: 2px solid #e2eda8; padding: 2px; border-radius: 5px; text-align: center;">
                   <div style="background-color: #e2eda8; border-radius: 5px;">

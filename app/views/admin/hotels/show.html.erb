@@ -59,10 +59,33 @@
     </div>
   </div>
 </div>
+<div>
+  <%= link_to "ルーム新規登録", new_admin_hotel_room_path(hotel_id: @hotel.id), class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
+</div>
 <div class = "container">
   <div class = "row">
-    <div>
-
+    <div class = "col-12">
+      <table>
+        <thead>
+          <tr>
+            <th>部屋タイプ</th>
+            <th>宿泊可能人数</th>
+            <th>部屋数</th>
+            <th>価格</th>
+            <th>確認事項</th>
+          </tr>
+        </thead>
+        <% @rooms.each do |room| %>
+          <tr>
+            <td><%= link_to admin_hotel_room_path(@hotel, room) do %><%= room.name %><% end %></td>
+            <td><%= room.capacity %></td>
+            <td><%= room.amount %></td>
+            <td><%= room.price %></td>
+            <td><%= room.checklist %></td>
+            <td><%= link_to "削除", admin_hotel_room_path(@hotel, room), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ class Admin::HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
-    #@rooms = @hotel.room
+    @rooms = @hotel.rooms
   end
 
   def edit
@@ -35,7 +35,9 @@ class Admin::HotelsController < ApplicationController
   end
 
   def destroy
-
+    @hotel = Hotel.find(params[:id])
+    @hotel.destroy
+    redirect_to admin_hotel_path
   end
 
    private
