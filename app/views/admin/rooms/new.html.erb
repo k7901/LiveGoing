@@ -1,2 +1,68 @@
-<h1>Admin::Rooms#new</h1>
-<p>Find me in app/views/admin/rooms/new.html.erb</p>
+<div class = "container">
+  <div class = ""><!--rowを入れるとレイアウトがおかしくなる-->
+    <div class = "col-12">
+      <h2 class="text-center", style="color: #48120E">
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+          ルーム新規登録
+        <i class="fa-solid fa-cookie-bite" style="color: #b37039;"></i>
+      </h2>
+    </div>
+    <div class = "row justify-content-center pt-5">
+      <div class = "col-md-6">
+        <div>
+          <%= form_with model: [@hotel, @room] , url: admin_hotel_rooms_path, local:true do |f| %>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label :"ルームタイプ" %>
+              </div>
+              <div class="col-7 px-0">
+                <%= f.text_field :name, class: 'form-control room_name' %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3">
+                 <%= f.label :"ルーム概要" %>
+              </div>
+              <div class="col-7 px-0">
+                 <%= f.text_area :introduction, class: 'form-control room_introduction',:size=>"40x8"  %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3">
+                 <%= f.label :"宿泊人数" %>
+              </div>
+              <div class="col-7 px-0">
+                <%= f.select :capacity, options_for_select(1..10), {}, { class: "form-control" } %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"確認事項" %></div>
+              <div class="col-7 px-0">
+               　<%= f.text_area :checklist, class: 'form-control room_introduction',:size=>"40x8"  %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"税抜価格" %></div>
+              <div class="col-7 px-0"><%= f.text_field :price %></div>
+            </div>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label :"部屋数" %>
+              </div>
+              <div class="col-7 px-0">
+              <%= f.text_field :amount %>
+              </div>
+            </div>
+            <div class="row my-lg-2 justify-content-md-center ">
+              <div class="col-4">
+                  <div style="background-color: #bee6d8; border-radius: 5px;">
+                    <%= f.submit "新規登録", class: 'btn btn-lg' %>
+                  </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

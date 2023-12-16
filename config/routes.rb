@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :hotels
-    resources :rooms
+    resources :hotels do
+      resources :rooms, except: [:index]
+    end
     resources :venues, except: [:show]
     resources :services, except: [:show]
     resources :bookings, only: [:show, :update]
