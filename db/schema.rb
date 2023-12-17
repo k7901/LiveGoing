@@ -120,7 +120,8 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.string "address", null: false
     t.decimal "latitude", null: false
     t.decimal "longitude", null: false
-    t.time "check_in_time", null: false
+    t.time "check_in_time_start", null: false
+    t.time "check_in_time_end", null: false
     t.time "check_out_time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

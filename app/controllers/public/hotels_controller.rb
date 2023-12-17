@@ -5,5 +5,10 @@ class Public::HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
+    @rooms = @hotel.rooms.all
+  end
+  
+  def create
+    
   end
 end

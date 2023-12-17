@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row" style="margin-bottom: 150px; margin-top:150px;">
+    <div class="col-12">
+      <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
+        <h2><%= @hotel.name %></h2>
+      </div>
+      <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
+        <h5><%= @hotel.address %></h5>
+      </div>
+      <div class="col-4  pt-5">
+        <%= image_tag @hotel.get_image(400,300) %>
+      </div>
+      <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
+        <h4><%= @hotel.introduction %></h4>
+      </div>
+      <div class="room  card-img d-flex row">
+         <%= form_with model: @booking, url: bookings_path, method: :post do |f| %>
+          <% @rooms.each do |room| %>
+            <div class="col-3 card-content card">
+                <p class="card-name", style="color:#48120E;"><%= room.name %></p>
+                <p class="card-name", style="color:#48120E;"><%= room.checklist %></p>
+
+                <span class="card-price top_item_pricelink", style="color:#48120E;">
+                 <%= number_to_currency(room.price * 1.1, delimiter: ',', format: '¥ %n', precision: 0) %>(税込)
+                </span>
+                <%= f.submit "予約", class: "btn font-bold ", style: "color:#48120E;" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
