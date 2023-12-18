@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+     <div class= "col text-center order-check-title">
+        <i class="fa-solid fa-clipboard-list"></i>
+          注文情報確認
+        <i class="fa-solid fa-pen-clip"></i>
+     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-7 pt-5 mx-auto text-center font-weight-bold ">
+
+       <%= @booking.room.hotel.name %>
+       <%= @booking.room.hotel.address %>
+       <%= @booking.room.name %>
+       <%#= @booking.booking.amount %>
+       <%#= @booking.booking.guest %>
+       <%= @booking.room.price %>
+       <%= @booking.payment_day %>
+
+       <%= form_with(model: @booking, url: bookings_path, method: :post,local: true) do |f| %>
+         <%= f.hidden_field :customer_id %>
+         <%= f.hidden_field :room_id %>
+         <%#= f.hidden_field :guest %>
+         <%#= f.hidden_field :amount %>
+         <%= f.hidden_field :check_in %>
+         <%= f.hidden_field :check_out %>
+         <%= f.hidden_field :total_price %>
+         <%= f.hidden_field :payment_method %>
+         <%= f.hidden_field :payment_day %>
+         <%= f.hidden_field :booking_status %>
+         <%= f.hidden_field :payment_status %>
+         <%= f.submit %>
+       <% end %>
+    </div>
+  </div>
+</div>

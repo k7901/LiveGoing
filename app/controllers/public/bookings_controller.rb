@@ -15,12 +15,23 @@ class Public::BookingsController < ApplicationController
     end
   end
 
-  def index
+
+  def check
+    @booking = Booking.new(booking_params)
+    @room = @booking.room
+    @hotel = @room.hotel
+  end
+
+  def complete
+
+  end
+
+   def index
     @bookings = current_customer.bookings.page(params[:page])
   end
 
   def show
-    @booking = Booking.find(params[:id])
+    #@booking = Booking.find(params[:id])
   end
 
 
@@ -28,6 +39,6 @@ class Public::BookingsController < ApplicationController
 
   def booking_params
     # 必要なパラメータを設定
-    params.require(:booking).permit(:customer_id, :check_in, :check_out, :total_place, :payment_method, :payment_day, :booking_status, :paymentstatus)
+    params.require(:booking).permit(:customer_id, :room_id, :guest, :amount, :check_in, :check_out, :total_price, :payment_method, :payment_day, :booking_status, :paymentstatus)
   end
 end
