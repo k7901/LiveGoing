@@ -29,16 +29,17 @@
             </div>
             </div>
             <div class="row my-lg-2 ">
-              <div class="col-3"><%= f.label :check_in_time_start, "チェックイン開始時間" %></div>
-              <div class="col-7 px-0"><%= f.time_field :check_in_time_start %></div>
+              <%= f.radio_button :payment_day, Booking.payment_days.key(0) ,checked: true %>
+            　<%= f.label :payment_day_right_now, Booking.payment_days_i18n[:right_now] %>
             </div>
             <div class="row my-lg-2 ">
-              <div class="col-3"><%= f.label :check_in_time_end, "チェックイン終了時間" %></div>
-              <div class="col-7 px-0"><%= f.time_field :check_in_time_end %></div>
+              <%= f.radio_button :payment_day, Booking.payment_days.key(1)  %>
+            　<%= f.label :payment_day_deadline, Booking.payment_days_i18n[:deadline] %>
             </div>
             <div class="row my-lg-2 ">
-              <div class="col-3"><%= f.label :"チェックアウト時間" %></div>
-              <div class="col-7 px-0"><%= f.time_field :check_out_time %></div>
+              <%= f.radio_button :payment_day, Booking.payment_days.key(2)  %>
+            　<%= f.label :payment_day_on_the_day, Booking.payment_days_i18n[:on_the_day] %>
+            </div>
             </div>
             <div class="row my-lg-2 justify-content-md-center ">
               <div class="col-4">
