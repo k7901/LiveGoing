@@ -60,6 +60,18 @@
                 { include_blank: "-- 選択してください --" }, {required: true, class: +"form-control", id: "venue-select" } %>
               </div>
             </div>
+             <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :check_in_time_start, "チェックイン開始時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_in_time_start %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :check_in_time_end, "チェックイン終了時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_in_time_end %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"チェックアウト時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_out_time %></div>
+            </div>
             <div class='form-group'>
               <%= f.collection_check_boxes(:service_ids, Service.all, :id, :name) do |service| %>
                 <div class='form-check'>

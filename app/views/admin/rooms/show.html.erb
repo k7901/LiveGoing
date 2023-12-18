@@ -38,7 +38,7 @@
           税抜価格
         </div>
         <div class = col-9, style="color: #48120E">
-            <%= @room.price %>
+          <%= number_to_currency(@room.price, delimiter: ',', format: '¥ %n', precision: 0) %>(税抜)
         </div>
       </div>
       <div class = "row my-lg-4", style="color: #48120E">
