@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
   create_table "bookings", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.time "check_in_time", null: false
-    t.time "check_out_time", null: false
+    t.integer "room_id", null: false
+    t.integer "guest", null: false
+    t.integer "amount", null: false
     t.date "check_in", null: false
     t.date "check_out", null: false
     t.integer "total_price", null: false
