@@ -8,7 +8,4 @@ class Public::HotelsController < ApplicationController
     @rooms = @hotel.rooms.all
   end
   
-  def create
-    
-  end
 end

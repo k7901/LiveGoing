@@ -37,13 +37,13 @@ class Admin::HotelsController < ApplicationController
   def destroy
     @hotel = Hotel.find(params[:id])
     @hotel.destroy
-    redirect_to admin_hotel_path
+    redirect_to admin_hotels_path
   end
 
    private
 
   def hotel_params
-    params.require(:hotel).permit(:venue_id, :image, :name, :introduction, :address, :latitude, :longitude, :check_in_time_start, :check_in_time_end, :check_out_time, {images: []}, service_ids: [])
+    params.require(:hotel).permit(:venue_id, :name, :introduction, :address, :latitude, :longitude, :check_in_time_start, :check_in_time_end, :check_out_time, images: [], service_ids: [])
   end
 
 end

@@ -29,9 +29,9 @@ Rails.application.routes.draw do
     get '/customers/check' => 'customers#check'
     patch 'customers/withdraw' => 'customers#withdraw'
     post 'customers/sign_out' => 'sessions#destroy'
-    resources :hotels, only: [:index, :show, :create]
+    resources :hotels, only: [:index, :show]
     resources :rooms, only: [:show]
-    resources :bookings, only: [:new, :index, :show, :create,] do
+    resources :bookings, only: [:new, :index, :show, :create ] do
       collection do
         get 'complete' => 'bookings#complete'
         post 'check' => 'bookings#check'

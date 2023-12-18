@@ -2,6 +2,7 @@ class Public::BookingsController < ApplicationController
   def new
     @booking = Booking.new
     @customer = current_customer
+    #@room = .find(params[:id])
   end
 
   def create
@@ -22,19 +23,6 @@ class Public::BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
   end
 
-
-
-  private
-
- def create
-    @booking = Booking.new(booking_params)
-    # 予約の保存ロジックをここに記述
-    if @booking.save
-      # 保存に成功した場合の処理（例: 予約完了ページへリダイレクト）
-    else
-      # 保存に失敗した場合の処理（例: エラーメッセージを表示）
-    end
-  end
 
   private
 

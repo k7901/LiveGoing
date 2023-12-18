@@ -3,6 +3,9 @@
     <div class = "col-4">
       <div><%= image_tag @hotel.get_image(300,300) %></div>
     </div>
+    <% @hotel.images.drop(1).each do |image| %>
+      <div><%= image_tag image.variant(resize_to_limit: [100, 100]).processed %></div>
+    <% end %>
     <div class = "col-8">
       <div class = "row my-lg-1">
         <div class = col-3 , style="color: #48120E">
