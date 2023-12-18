@@ -1,2 +1,57 @@
-<h1>Public::Bookings#new</h1>
-<p>Find me in app/views/public/bookings/new.html.erb</p>
+<div class = "container">
+    <div class = "row justify-content-center pt-5">
+      <div class = "col-md-6">
+        <div>
+          <%= form_with model: [@booking,@customer], url: check_bookings_path, local:true do |f| %>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label "姓(ローマ字)" %>
+              </div>
+              <div class="col-7 px-0">
+              <%= f.text_field :last_name, class: 'form-control last_name' %>
+              </div>
+            </div>
+            <div class="row my-lg-2">
+              <div class="col-3">
+                <%= f.label :"名(ローマ字)" %>
+              </div>
+              <div class="col-7 px-0">
+                <%= f.text_field :first_name, class: 'form-control first_name' %>
+              </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3">
+                 <%= f.label :"電話番号" %>
+              </div>
+              <div class="col-7 px-0">
+                 <%= f.text_field :telephone_number, class: 'form-control hotel_introduction' %>
+              </div>
+            </div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :check_in_time_start, "チェックイン開始時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_in_time_start %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :check_in_time_end, "チェックイン終了時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_in_time_end %></div>
+            </div>
+            <div class="row my-lg-2 ">
+              <div class="col-3"><%= f.label :"チェックアウト時間" %></div>
+              <div class="col-7 px-0"><%= f.time_field :check_out_time %></div>
+            </div>
+            <div class="row my-lg-2 justify-content-md-center ">
+              <div class="col-4">
+                <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
+                  <div style="background-color: #bee6d8; border-radius: 5px;">
+                    <%= f.submit "予約", class: 'btn btn-lg' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
