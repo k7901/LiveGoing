@@ -1,11 +1,15 @@
 
 
 <%= form_with url: hotels_path, method: :get do |form| %>
-  <%= form.text_field :venue %>
-  <%= form.date_field :check_in_date %>
-  <%= form.date_field :check_out_date %>
-  <%= form.number_field :guests_count, min: 1 %>
-  <%= form.number_field :rooms_count, min: 1 %>
+  会場
+  <%= form.text_field :venue, name: 'search[venue]' %>
+  日程
+  <%= form.date_field :check_in_date , name: 'search[check_in_date]'%>
+  <%= form.date_field :check_out_date , name: 'search[check_out_date]'%>
+  部屋数
+  <%= form.number_field :amount, name: 'search[amount]', min: 1 %>
+  宿泊人数
+  <%= form.number_field :guest, name: 'search[guest]', min: 1 %>
   <%= form.submit "検索" %>
 <% end %>
 

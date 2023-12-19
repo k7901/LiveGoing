@@ -1,66 +1,51 @@
 <div class = "container">
-    <div class = "row justify-content-center pt-5">
-      <div class = "col-md-6">
-        <div>
-          <%= form_with model: @booking, url: check_bookings_path, method: :post, local:true do |f| %>
-            <%= f.hidden_field :room_id, value: params[:room_id] %>
-            <div class="row my-lg-2">
-              <div class="col-3">
-                <%= f.label "姓(ローマ字)" %>
-              </div>
-              <div class="col-7 px-0">
-              <%= f.text_field :last_name, class: 'form-control last_name', readonly: true, value: @customer.last_name %>
-              </div>
-            </div>
-            <div class="row my-lg-2">
-              <div class="col-3">
-                <%= f.label :"名(ローマ字)" %>
-              </div>
-              <div class="col-7 px-0">
-                <%= f.text_field :first_name, class: 'form-control first_name', readonly: true, value: @customer.first_name %>
-              </div>
-            </div>
-            <div class="row my-lg-2 ">
-              <div class="col-3">
-                 <%= f.label :"電話番号" %>
-              </div>
-              <div class="col-7 px-0">
-                 <%= f.text_field :telephone_number, class: 'form-control hotel_introduction', readonly: true, value: @customer.telephone_number %>
-              </div>
-            </div>
-             <div class="row my-lg-2 ">
-              <div class="col-3">
-                 <%= f.label :"メールアドレス" %>
-              </div>
-              <div class="col-7 px-0">
-                 <%= f.text_field :email, class: 'form-control hotel_introduction', readonly: true, value: @customer.email %>
-              </div>
-            </div>
-            <div class="row my-lg-2 ">
-              <%= f.radio_button :payment_day, Booking.payment_days.key(0) ,checked: true %>
-            　<%= f.label :payment_day_right_now, Booking.payment_days_i18n[:right_now] %>
-            </div>
-            <div class="row my-lg-2 ">
-              <%= f.radio_button :payment_day, Booking.payment_days.key(1)  %>
-            　<%= f.label :payment_day_deadline, Booking.payment_days_i18n[:deadline] %>
-            </div>
-            <div class="row my-lg-2 ">
-              <%= f.radio_button :payment_day, Booking.payment_days.key(2)  %>
-            　<%= f.label :payment_day_on_the_day, Booking.payment_days_i18n[:on_the_day] %>
-            </div>
-            </div>
-            <div class="row my-lg-2 justify-content-md-center ">
-              <div class="col-4">
-                <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
-                  <div style="background-color: #bee6d8; border-radius: 5px;">
-                    <%= f.submit "予約", class: 'btn btn-lg' %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+  <div class = "row justify-content-center pt-5">
+    <div class = "col-md-6">
+      <%= form_with model: @booking, url: check_bookings_path, method: :post, local:true do |f| %>
+        <%= f.hidden_field :customer_id, value: current_customer.id %>
+        <%= f.hidden_field :room_id, value: params[:room_id] %>
+        <div class="row my-lg-2">
+          <div class="col-3">
+            <%= f.label "姓(ローマ字)" %>
+          </div>
+          <div class="col-7 px-0">
+          <%= f.text_field :last_name, class: 'form-control last_name', readonly: true, value: @customer.last_name %>
+          </div>
         </div>
-      </div>
+        <div class="row my-lg-2">
+          <div class="col-3">
+            <%= f.label :"名(ローマ字)" %>
+          </div>
+          <div class="col-7 px-0">
+            <%= f.text_field :first_name, class: 'form-control first_name', readonly: true, value: @customer.first_name %>
+          </div>
+        </div>
+        <div class="row my-lg-2 ">
+          <div class="col-3">
+             <%= f.label :"電話番号" %>
+          </div>
+          <div class="col-7 px-0">
+             <%= f.text_field :telephone_number, class: 'form-control hotel_introduction', readonly: true, value: @customer.telephone_number %>
+          </div>
+        </div>
+        <div class="row my-lg-2 ">
+          <div class="col-3">
+             <%= f.label :"メールアドレス" %>
+          </div>
+          <div class="col-7 px-0">
+             <%= f.text_field :email, class: 'form-control hotel_introduction', readonly: true, value: @customer.email %>
+          </div>
+        </div>
+        <div class="row my-lg-2 justify-content-md-center ">
+          <div class="col-4">
+            <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
+              <div style="background-color: #bee6d8; border-radius: 5px;">
+                <%= f.submit "予約", class: 'btn btn-lg' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

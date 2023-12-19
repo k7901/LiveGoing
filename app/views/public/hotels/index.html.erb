@@ -1,15 +1,9 @@
 
-
-
-
 <% @hotels.each do |hotel| %>
   <p><%= image_tag hotel.get_image(100,100) %></p>
   <p><%= link_to hotel_path(hotel.id) do %><%= hotel.name %><% end %></p>
   <p><%#= hotel.rooms.checklist %></p>
 <% end %>
-
-
-
 
 <h2>gmap</h2>
 
