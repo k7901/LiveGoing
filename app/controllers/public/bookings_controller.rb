@@ -26,7 +26,7 @@ class Public::BookingsController < ApplicationController
 
   end
 
-   def index
+  def index
     @bookings = current_customer.bookings.page(params[:page])
   end
 

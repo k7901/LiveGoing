@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
   create_table "bookings", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "room_id", null: false
@@ -94,8 +95,6 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.datetime "remember_created_at"
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.string "last_name_kana", null: false
-    t.string "first_name_kana", null: false
     t.date "birthday", null: false
     t.string "address", null: false
     t.string "telephone_number", null: false
