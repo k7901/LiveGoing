@@ -1,2 +1,74 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 ml-5 mb-5">
+      <div class="customer-edit-title col-6 text-center">
+        <h3>
+          会員情報編集
+          <i class="fa-regular fa-clipboard" style="color: #48120E;"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <%= form_with model: @customer, url: customers_update_path, method: :patch do |f| %>
+    <%= render "public/shared/error_messages", resource: @customer %>
+
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-2">氏名</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :first_name %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-2">生年月日</p>
+      </div>
+      <div class="col-3 form-group">
+         <%= f.date_select :birthday, use_month_numbers: true,start_year: 1950, end_year: (Time.now.year), default: Date.new(1980, 1, 1),autofocus: true, autocomplete: "birthday", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-2">住所</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :address %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-2">電話番号</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :telephone_number %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-3 form-group">
+        <p class="mt-2">メールアドレス</p>
+      </div>
+      <div class="col-3 form-group">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+  </div>
+    <div class="form-row justify-content-center pb-2">
+      <!--<div class="col-6 form-group mt-5 ml-5 mb-5">-->
+        <span class="text-center pr-4"><%= f.submit '編集内容を保存',class:"btn btn-light", style: "background-color: #ffe9a9; color: #664e3d;" %></span>
+      <!--</div>-->
+      <!--<div class="col-6 form-group ml-5 mb-5">-->
+        <span class="text-center"><%= link_to "退会する", customers_withdraw_path, method: :patch, data: { confirm: '本当に退会しますか？' }, class:"btn btn-light", style: "background-color: #f5b1aa; color: #664e3d;" %></span>
+      <!--</div>--><%#= link_to "削除", admin_hotel_path(hotel.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
+    </div>
+
+  <% end %>
+
+

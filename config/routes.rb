@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  devise_scope :customer do
+    post 'customer/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   namespace :admin do
     root to: 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
