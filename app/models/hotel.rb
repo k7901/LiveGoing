@@ -15,12 +15,15 @@ class Hotel < ApplicationRecord
       .amount(search_params[:amount])
   end
 
+
+
   scope :venue_like, -> (venue_name) { joins(:venue).where('venues.name LIKE ?', "%#{venue_name}%") if venue_name.present? }
   scope :check_in_out_range, -> (check_in_date, check_out_date) {
-    where('check_in_date <= ? AND check_out_date >= ?', check_in_date, check_out_date) if check_in_date.present? && check_out_date.present?
-  }
+  if check_in_date.present? && check_out_date.present?
+    joins(:rooms).where('rooms.check_in_date <= ? AND rooms.check_out_date >= ?', check_in_date, check_out_date)
+  end}
   scope :guest, -> (guest) { joins(:rooms).where('rooms.capacity >= ?', guest) if guest.present? }
-  scope :amount, -> (amount) { joins(:rooms).where('rooms.capacity >= ?', amount) if amount.present? }
+  scope :amount, -> (amount) { joins(:rooms).where('rooms.amount >= ?', amount) if amount.present? }
 
 
 

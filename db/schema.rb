@@ -147,8 +147,10 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.text "introduction", null: false
     t.text "checklist", null: false
     t.integer "price", null: false
-    t.integer "capacity", null: false
     t.integer "amount", null: false
+    t.integer "guest", null: false
+    t.date "check_in_date", null: false
+    t.date "check_out_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

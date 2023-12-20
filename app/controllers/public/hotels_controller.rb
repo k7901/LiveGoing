@@ -28,7 +28,6 @@ class Public::HotelsController < ApplicationController
     end
   end
 
-
   private
 
   def hotel_search_params

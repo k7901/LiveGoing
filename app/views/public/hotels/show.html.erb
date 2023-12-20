@@ -30,9 +30,7 @@
                 <%= f.hidden_field :amount, value: params[:amount] %>
                 <%= f.hidden_field :check_in_date, value: params[:check_in_date] %>
                 <%= f.hidden_field :check_out_date, value: params[:check_out_date] %>
-
                 <!-- その他の予約に必要なフィールド -->
-
                 <%= f.submit "予約" %>
               <% end %>
               <%#= link_to "予約" , new_booking_path(room_id: room.id) %>
