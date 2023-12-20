@@ -14,16 +14,28 @@
         <h4><%= @hotel.introduction %></h4>
       </div>
       <div class="room  card-img d-flex row">
-          <% @rooms.each do |room| %>
+      　<% @hotel.rooms.each do |room| %>
+       　  <div class="room">
             <div class="col-3 card-content card">
-                <p class="card-name", style="color:#48120E;"><%= room.name %></p>
-                <p class="card-name", style="color:#48120E;"><%= room.checklist %></p>
-                <span class="card-price top_item_pricelink", style="color:#48120E;">
-                 <%= number_to_currency(room.price * 1.1, delimiter: ',', format: '¥ %n', precision: 0) %>(税込)
-                </span>
-                <%= link_to "予約" , new_booking_path(room_id: room.id) %>
-            </div>
-          <% end %>
+              <p class="card-name", style="color:#48120E;"><%= room.name %></p>
+              <p class="card-name", style="color:#48120E;"><%= room.checklist %></p>
+              <span class="card-price top_item_pricelink", style="color:#48120E;">
+                <% if @room_prices[room.id] %>
+                  <p><%= number_to_currency(@room_prices[room.id]*1.1, unit: "¥", precision: 0) %></p>
+                <% end %>
+              </span>
+              <%= form_with model: @booking, url: bookings_path, method: :post do |f| %>
+                <%= f.hidden_field :room_id, value: room.id %>
+                <%= f.hidden_field :guest, value: params[:guest] %>
+                <%= f.hidden_field :amount, value: params[:amount] %>
+                <%= f.hidden_field :check_in_date, value: params[:check_in_date] %>
+                <%= f.hidden_field :check_out_date, value: params[:check_out_date] %>
+                <!-- その他の予約に必要なフィールド -->
+                <%= f.submit "予約" %>
+              <% end %>
+              <%#= link_to "予約" , new_booking_path(room_id: room.id) %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

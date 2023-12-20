@@ -8,8 +8,9 @@ class Admin::RoomsController < ApplicationController
     @hotel = Hotel.find(params[:hotel_id])
     @room = @hotel.rooms.new(room_params)
     if @room.save
-      redirect_to admin_hotel_path( @hotel)
+      redirect_to admin_hotel_path(@hotel)
     else
+      logger.debug @room.errors.full_messages
       render :new
     end
   end
@@ -44,7 +45,7 @@ class Admin::RoomsController < ApplicationController
    private
 
   def room_params
-    params.require(:room).permit(:room_id, :hotel_id, :image, :name, :introduction, :checklist, :price, :capacity, :amount )
+    params.require(:room).permit(:room_id, :hotel_id, :image, :name, :introduction, :checklist, :price, :guest, :amount, :check_in_date, :check_out_date )
   end
 
 end

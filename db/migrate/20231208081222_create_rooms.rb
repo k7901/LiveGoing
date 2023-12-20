@@ -6,8 +6,10 @@ class CreateRooms < ActiveRecord::Migration[6.1]
       t.text :introduction, null: false
       t.text :checklist, null: false
       t.integer :price, null: false
-      t.integer :capacity, null: false
       t.integer :amount, null: false
+      t.integer :guest, null: false
+      t.date :check_in_date, null: false
+      t.date :check_out_date, null: false
       t.timestamps
     end
   end

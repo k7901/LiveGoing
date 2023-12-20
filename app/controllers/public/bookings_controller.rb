@@ -7,10 +7,11 @@ class Public::BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    # 予約の保存ロジックをここに記述
     if @booking.save
-      # 保存に成功した場合の処理（例: 予約完了ページへリダイレクト）
+      redirect_to complete_bookings_path
     else
+      logger.debug @booking.errors.full_messages
+      render :check
       # 保存に失敗した場合の処理（例: エラーメッセージを表示）
     end
   end
@@ -39,6 +40,6 @@ class Public::BookingsController < ApplicationController
 
   def booking_params
     # 必要なパラメータを設定
-    params.require(:booking).permit(:customer_id, :room_id, :guest, :amount, :check_in, :check_out, :total_price, :payment_method, :payment_day, :booking_status, :paymentstatus)
+    params.require(:booking).permit(:customer_id, :room_id, :guest, :amount, :check_in_date, :check_out_date, :price, :booking_status, :paymentstatus, :last_name, :first_name, :telephone_number, :email)
   end
 end

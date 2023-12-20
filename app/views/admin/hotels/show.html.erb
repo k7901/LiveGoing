@@ -41,6 +41,30 @@
       </div>
       <div class = "row my-lg-4", style="color: #48120E">
         <div class = col-3>
+          チェックイン開始
+        </div>
+        <div class = col-9, style="color: #48120E">
+          <%= @hotel.check_in_time_start.strftime("%H:%M") %>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          チェックイン終了
+        </div>
+        <div class = col-9, style="color: #48120E">
+          <%= @hotel.check_in_time_end.strftime("%H:%M") %>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
+          チェックアウト終了
+        </div>
+        <div class = col-9, style="color: #48120E">
+          <%= @hotel.check_out_time.strftime("%H:%M") %>
+        </div>
+      </div>
+      <div class = "row my-lg-4", style="color: #48120E">
+        <div class = col-3>
           サービス
         </div>
         <div class = col-9, style="color: #48120E">
@@ -81,7 +105,7 @@
         <% @rooms.each do |room| %>
           <tr>
             <td><%= link_to admin_hotel_room_path(@hotel, room) do %><%= room.name %><% end %></td>
-            <td><%= room.capacity %></td>
+            <td><%= room.guest %></td>
             <td><%= room.amount %></td>
             <td><%= room.price %></td>
             <td><%= room.checklist %></td>

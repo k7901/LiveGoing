@@ -1,10 +1,6 @@
 ja:
   enums:
     booking:
-      payment_day:
-        right_now: "今すぐ支払う"
-        deadline: "期日までに支払う"
-        on_the_day: "現地で支払う"
   activerecord:
     errors:
       messages:
