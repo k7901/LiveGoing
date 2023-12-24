@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" style="margin-bottom: 150px; margin-top:150px;">
+  <div class="row">
     <div class="col-12">
       <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
         <h2><%= @hotel.name %></h2>
@@ -13,29 +13,43 @@
       <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
         <h4><%= @hotel.introduction %></h4>
       </div>
-      <div class="room  card-img d-flex row">
-      　<% @hotel.rooms.each do |room| %>
-       　  <div class="room">
-            <div class="col-3 card-content card">
-              <p class="card-name", style="color:#48120E;"><%= room.name %></p>
-              <p class="card-name", style="color:#48120E;"><%= room.checklist %></p>
-              <span class="card-price top_item_pricelink", style="color:#48120E;">
-                <% if @room_prices[room.id] %>
-                  <p><%= number_to_currency(@room_prices[room.id]*1.1, unit: "¥", precision: 0) %></p>
-                <% end %>
-              </span>
-              <%= form_with model: @booking, url: bookings_path, method: :post do |f| %>
-                <%= f.hidden_field :room_id, value: room.id %>
-                <%= f.hidden_field :guest, value: params[:guest] %>
-                <%= f.hidden_field :amount, value: params[:amount] %>
-                <%= f.hidden_field :check_in_date, value: params[:check_in_date] %>
-                <%= f.hidden_field :check_out_date, value: params[:check_out_date] %>
-                <!-- その他の予約に必要なフィールド -->
-                <%= f.submit "予約" %>
-              <% end %>
-              <%#= link_to "予約" , new_booking_path(room_id: room.id) %>
-          </div>
-        <% end %>
+      <div class="row d-flex">
+        <table>
+          <thead>
+             <tr>
+              <th>ルームタイプ</th>
+              <th>宿泊人数</th>
+              <th>確認事項</th>
+              <th>料金</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @hotel.rooms.each do |room| %>
+            　<tr>
+            　   <td><%= room.name %></td>
+            　   <td><%= room.guest %></td>
+            　   <td><%= room.checklist %></td>
+            　   <td>
+            　     <% if @room_prices && @room_prices[room.id] %>
+                    <p><%= number_to_currency(@room_prices[room.id]*1.1, unit: "円", precision: 0) %></p>
+                  <% end %>
+                </td>
+            　</tr>
+            <% end %>
+          </tbody>
+        </table>
+        <table>
+          <% @hotel.comments.each do |hotel_comment| %>
+            <tr>
+              <td>
+                <%= hotel_comment.customer.last_name %><%= hotel_comment.customer.first_name %>
+              </td>
+              <td>
+                <%= hotel_comment.comment %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>

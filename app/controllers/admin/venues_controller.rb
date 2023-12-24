@@ -32,6 +32,9 @@ class Admin::VenuesController < ApplicationController
     redirect_to admin_venues_path
   end
   
+  
+  
+  
   private
 
   def venue_params

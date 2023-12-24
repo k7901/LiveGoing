@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :customers,controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: "public/sessions"
   }
   devise_for :admin, controllers: {
     sessions: "admin/sessions"
@@ -20,8 +20,7 @@ Rails.application.routes.draw do
     end
     resources :venues, except: [:show]
     resources :services, except: [:show]
-    resources :bookings, only: [:show, :update]
-    resources :booking_details, only: [:update]
+    resources :reviews, except:[:new, :create, :destroy]
   end
 
   scope module: :public do
@@ -33,16 +32,11 @@ Rails.application.routes.draw do
     get '/customers/check' => 'customers#check'
     patch 'customers/withdraw' => 'customers#withdraw'
     post 'customers/sign_out' => 'sessions#destroy'
-    resources :hotels, only: [:index, :show]
-    resources :rooms, only: [:show]
-    resources :bookings, only: [:new, :index, :show, :create ] do
-      collection do
-        get 'complete' => 'bookings#complete'
-        post 'check' => 'bookings#check'
-        patch 'withdraw' => 'booking#withdraw'
-      end
+    resources :hotels, only: [:index, :show] do
+      resources :comments
     end
-    resources :comments
+    resources :rooms, only: [:show]
+    get '/prefectures_for_region', to: 'prefectures#prefectures_for_region'
+    get '/venues_for_prefecture', to: 'venues#venues_for_prefecture'
   end
-
 end
