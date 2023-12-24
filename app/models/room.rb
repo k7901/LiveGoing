@@ -1,11 +1,11 @@
 class Room < ApplicationRecord
   belongs_to :hotel
-  has_many :booking_details
+  has_many :bookings
   has_one_attached :image
 
   validates :name, presence: true
   validates :introduction, presence: true
-  validates :capacity, presence: true
+  validates :guest, presence: true
   validates :hotel_id, presence: true
   validates :amount, presence: true
   validates :price, presence: true

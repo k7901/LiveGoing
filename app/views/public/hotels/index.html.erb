@@ -7,10 +7,8 @@
 
 <h2>gmap</h2>
 
-<!-- ここから追加 -->
-<input id="address" type="textbox" value="GeekSalon">
-<input type="button" value="Encode" onclick="codeAddress()">
-<!-- ここまで追加-->
+
+
 
 <div id='map'></div>
 
@@ -23,6 +21,8 @@
 
 <script>
 let map
+let hotels = <%= raw @hotels.map { |hotel| {lat: hotel.latitude, lng: hotel.longitude, title: hotel.name} }.to_json %>;
+let venues = <%= raw @venues.map { |venue| {lat: venue.latitude, lng: venue.longitude, title: venue.name} }.to_json %>;
 function initMap(){
   geocoder = new google.maps.Geocoder()
 
@@ -31,12 +31,51 @@ function initMap(){
     zoom: 12,
   });
 
-  marker = new google.maps.Marker({
-    position:  {lat: 40.7828, lng:-73.9653},
-    map: map
+  // ホテルの位置にピンを追加
+  hotels.forEach(function(hotel) {
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(hotel.lat, hotel.lng),
+      map: map,
+      title: hotel.title
+    });
+  });
+
+// 会場の位置にピンを追加
+  venues.forEach(function(venue) {
+    var venueMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(venue.lat, venue.lng),
+      map: map,
+      title: venue.title
+    });
   });
 }
-// ここから追加 
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 検索フォームの要素を取得
+  var searchForm = document.getElementById('searchForm');
+
+  // 検索フォームの送信イベントを検知
+  searchForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // デフォルトの送信動作をキャンセル
+
+    // 会場セレクトボックスの要素を取得
+    var venueSelect = document.getElementById('venueSelect');
+    var selectedVenueId = venueSelect.value; // 選択された会場のID
+
+    // 会場の座標を取得
+    var selectedVenue = venues.find(function(venue) {
+    return venue.id === parseInt(selectedVenueId, 10);
+  });
+
+
+    if (selectedVenue) {
+      // マップの中心を更新
+      map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
+    }
+  });
+});
+
+
 let geocoder
 
 function codeAddress(){
@@ -52,9 +91,7 @@ function codeAddress(){
     } else {
       alert('該当する結果がありませんでした：' + status);
     }
-  });   
+  });
 }
-// ここまで追加 
 </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGAVJW8AWYF6x19CvBClmY19eWYchcsnk&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZCPach9MtYERXIqbP8hQPUf9OSKh4r9Y&callback=initMap" async defer></script>
