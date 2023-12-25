@@ -23,7 +23,7 @@
               <th>料金</th>
             </tr>
           </thead>
-          <tbody>
+
             <% @hotel.rooms.each do |room| %>
             　<tr>
             　   <td><%= room.name %></td>
@@ -36,19 +36,10 @@
                 </td>
             　</tr>
             <% end %>
-          </tbody>
+
         </table>
         <table>
-          <% @hotel.comments.each do |hotel_comment| %>
-            <tr>
-              <td>
-                <%= hotel_comment.customer.last_name %><%= hotel_comment.customer.first_name %>
-              </td>
-              <td>
-                <%= hotel_comment.comment %>
-              </td>
-            </tr>
-          <% end %>
+          
         </table>
       </div>
     </div>

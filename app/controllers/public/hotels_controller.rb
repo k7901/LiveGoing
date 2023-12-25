@@ -3,6 +3,7 @@ class Public::HotelsController < ApplicationController
     @search_params = hotel_search_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
     @hotels = Hotel.search(@search_params)  #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している。
     @venues = Venue.all
+   
   end
 
   def show
