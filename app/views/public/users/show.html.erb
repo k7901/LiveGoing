@@ -3,11 +3,11 @@
     <div class = "row d-flex justify-content-center">
       <font size="10" face="Times New Roman">My Page</font><br/>
     </div>
-    <% if @customer.email != "guest@example.com" %>
+    <% if @user.email != "guest@example.com" %>
       <div class="row">
         <div class="col text-center p-4 h-100 w-100">
           <span class="pr-4">登録情報</span>
-          <span class=""><%= link_to "編集する", customers_edit_path, class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></span>
+          <span class=""><%= link_to "編集する", users_edit_path, class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></span>
         </div>
       </div>
     <% end %>
@@ -17,11 +17,11 @@
           <tbody>
             <tr>
               <td>氏名</td>
-              <td><%= @customer.last_name %><%= @customer.first_name %></td>
+              <td><%= @user.last_name %><%= @user.first_name %></td>
             </tr>
             <tr>
               <td>メールアドレス</td>
-              <td><%= @customer.email %></td>
+              <td><%= @user.email %></td>
             </tr>
           </tbody>
         </table>

@@ -1,4 +1,4 @@
-class Public::HotelCommentsController < ApplicationController
+class Public::CommentsController < ApplicationController
   def new
   end
 
@@ -10,6 +10,7 @@ class Public::HotelCommentsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+
   def destroy
     Comment.find(params[:id]).destroy
     redirect_back fallback_location: root_path
@@ -18,6 +19,6 @@ class Public::HotelCommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment, :star)
   end
 end

@@ -3,20 +3,20 @@
     <div class="col-12">
         <h2 class="text-center", style="color: #48120E">
           <i class="fa-solid fa-clover" style="color: #54917f;"></i>
-            <%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集
+            <%= @user.last_name %><%= @user.first_name %>さんの会員情報編集
           <i class="fa-solid fa-clover" style="color: #54917f;"></i>
         </h2>
       </div>
     </div>
   </div>
   <div class="row pt-5">
-    <%= form_with model: [:admin, @customer], url: admin_customer_path(@customer.id), method: :patch do |f| %>
+    <%= form_with model: [:admin, @user], url: admin_user_path(@user.id), method: :patch do |f| %>
       <div class="row pb-3" >
         <div class="col-4 pr-5 mr-5">
           会員ID
         </div>
         <div class="col-6 pl-5 ml-5">
-          <%= @customer.id %>
+          <%= @user.id %>
         </div>
       </div>
        <div class="row pb-3" >
@@ -25,22 +25,6 @@
         </div>
         <div class="col-6 pl-5 ml-5">
           <%= f.text_field :last_name %><%= f.text_field :first_name %>
-        </div>
-      </div>
-      <div class="row pb-3" >
-        <div class="col-4 pr-5 mr-5">
-          住所
-        </div>
-        <div class="col-6 pl-5 ml-5">
-          <%= f.text_field :address %>
-        </div>
-      </div>
-      <div class="row pb-3" >
-        <div class="col-4 pr-5 mr-5">
-          電話番号
-        </div>
-        <div class="col-6 pl-5 ml-5">
-          <%= f.text_field :telephone_number %>
         </div>
       </div>
       <div class="row pb-3" >

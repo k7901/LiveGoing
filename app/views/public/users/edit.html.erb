@@ -10,8 +10,8 @@
     </div>
   </div>
 
-  <%= form_with model: @customer, url: customers_update_path, method: :patch do |f| %>
-    <%= render "public/shared/error_messages", resource: @customer %>
+  <%= form_with model: @user, url: users_update_path, method: :patch do |f| %>
+    <%= render "public/shared/error_messages", resource: @user %>
 
     <div class="form-row">
       <div class="col-3 form-group">
@@ -38,7 +38,7 @@
         <span class="text-center pr-4"><%= f.submit '編集内容を保存',class:"btn btn-light", style: "background-color: #ffe9a9; color: #664e3d;" %></span>
       <!--</div>-->
       <!--<div class="col-6 form-group ml-5 mb-5">-->
-        <span class="text-center"><%= link_to "退会する", customers_withdraw_path, method: :patch, data: { confirm: '本当に退会しますか？' }, class:"btn btn-light", style: "background-color: #f5b1aa; color: #664e3d;" %></span>
+        <span class="text-center"><%= link_to "退会する", users_withdraw_path, method: :patch, data: { confirm: '本当に退会しますか？' }, class:"btn btn-light", style: "background-color: #f5b1aa; color: #664e3d;" %></span>
       <!--</div>--><%#= link_to "削除", admin_hotel_path(hotel.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
     </div>
 
