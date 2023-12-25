@@ -9,7 +9,6 @@
 
 
 
-
 <div id='map'></div>
 
 <style>
@@ -26,10 +25,11 @@ let venues = <%= raw @venues.map { |venue| {lat: venue.latitude, lng: venue.long
 function initMap(){
   geocoder = new google.maps.Geocoder()
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7828, lng:-73.9653},
+  let map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 35.6804, lng: 139.7690 }, // ここにデフォルトの座標を設定
     zoom: 12,
   });
+
 
   // ホテルの位置にピンを追加
   hotels.forEach(function(hotel) {
@@ -94,4 +94,4 @@ function codeAddress(){
   });
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZCPach9MtYERXIqbP8hQPUf9OSKh4r9Y&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
