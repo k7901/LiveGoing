@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :customers,controllers: {
+  devise_for :users,controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
@@ -8,13 +8,13 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  devise_scope :customer do
-    post 'customer/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  devise_scope :user do
+    post 'user/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
   namespace :admin do
     root to: 'homes#top'
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update]
     resources :hotels do
       resources :rooms, except: [:index]
     end
@@ -26,12 +26,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    get '/customers/information/edit' => 'customers#edit',as: 'customers_edit'
-    patch '/customers/information' => 'customers#update',as: 'customers_update'
-    get '/customers/my_page' => 'customers#show',as:'customers_show'
-    get '/customers/check' => 'customers#check'
-    patch 'customers/withdraw' => 'customers#withdraw'
-    post 'customers/sign_out' => 'sessions#destroy'
+    get '/users/information/edit' => 'users#edit',as: 'users_edit'
+    patch '/users/information' => 'users#update',as: 'users_update'
+    get '/users/my_page' => 'users#show',as:'users_show'
+    get '/users/check' => 'users#check'
+    patch 'users/withdraw' => 'users#withdraw'
+    post 'users/sign_out' => 'sessions#destroy'
     resources :hotels, only: [:index, :show] do
       resources :comments
     end
