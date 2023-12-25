@@ -26,33 +26,6 @@
     </div>
     <div class="form-row">
       <div class="col-3 form-group">
-        <p class="mt-2">生年月日</p>
-      </div>
-      <div class="col-3 form-group">
-         <%= f.date_select :birthday, use_month_numbers: true,start_year: 1950, end_year: (Time.now.year), default: Date.new(1980, 1, 1),autofocus: true, autocomplete: "birthday", class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-3 form-group">
-        <p class="mt-2">住所</p>
-      </div>
-      <div class="col-3 form-group">
-        <%= f.text_field :address %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-3 form-group">
-        <p class="mt-2">電話番号</p>
-      </div>
-      <div class="col-3 form-group">
-        <%= f.text_field :telephone_number %>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-3 form-group">
         <p class="mt-2">メールアドレス</p>
       </div>
       <div class="col-3 form-group">

@@ -8,8 +8,6 @@
 <h2>gmap</h2>
 
 
-
-
 <div id='map'></div>
 
 <style>
@@ -64,8 +62,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 会場の座標を取得
     var selectedVenue = venues.find(function(venue) {
-    return venue.id === parseInt(selectedVenueId, 10);
-  });
+      return venue.id === parseInt(selectedVenueId, 10);
+    });
+
+    if (selectedVenue) {
+      // マップの中心を更新
+      map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
+    };
+
 
 
     if (selectedVenue) {
@@ -94,4 +98,9 @@ function codeAddress(){
   });
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZCPach9MtYERXIqbP8hQPUf9OSKh4r9Y&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
+
+<!--script src="https://maps.googleapis.com/maps/api/js?key=pi/js?key=<%#= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
+
+
+
