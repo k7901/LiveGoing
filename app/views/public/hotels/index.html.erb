@@ -1,9 +1,96 @@
+<div class = "">
+  <input id="searchInput" type="text">
+  <input type="button" onClick="searchVenues()" value="検索">
 
-<% @hotels.each do |hotel| %>
-  <p><%= image_tag hotel.get_image(100,100) %></p>
-  <p><%= link_to hotel_path(hotel.id) do %><%= hotel.name %><% end %></p>
-  <p><%#= hotel.rooms.checklist %></p>
+
+  <!--<%#= form_with url: hotels_path, method: :get, local: :true, id: 'searchForm'  do |form| %>-->
+  <!--    会場-->
+  <!--  <%#= form.text_field :venue,id: 'searchInput', name: 'search[venue]' %>-->
+    <%#= form.number_field :amount, name: 'search[amount]', min: 1 %>
+    <%#= form.number_field :guest, name: 'search[guest]', min: 1 %>
+  <!--  <%#= form.hidden_field :venue_id, id: 'venueId' %>-->
+  <!--  <%#= form.submit "検索" %>-->
+  <!--<%# end %>-->
+</div>
+<!-- モーダルウィンドウ -->
+<!-- 地域選択モーダル -->
+<div class="modal fade" id="regionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">地域を選択</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- 地域の選択リスト -->
+        <ul id="regionSelect" class="list-group">
+          <% Region.all.each do |region| %>
+            <li class="list-group-item list-group-item-action" data-region-id="<%= region.id %>"><%= region.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 都道府県選択モーダル -->
+<div class="modal" id="prefectureModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">都道府県を選択</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- 都道府県の選択リスト -->
+        <select id="prefectureSelect" class="form-control">
+          <% Prefecture.all.each do |prefecture| %>
+            <option value="<%= prefecture.id %>"><%= prefecture.name %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">選択</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 会場選択モーダル -->
+<div class="modal" id="venueModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">会場を選択</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- 会場の選択リスト（初期状態では空） -->
+        <select id="venueSelect" class="form-control">
+          <!-- オプションはAjaxで動的に追加 -->
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">選択</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% if @hotels.present? %>
+  <% @hotels.each do |hotel| %>
+    <p><%= image_tag hotel.get_image(100,100) %></p>
+    <p><%= link_to hotel_path(hotel.id) do %><%= hotel.name %><% end %></p>
+    <p><%#= hotel.rooms.checklist %></p>
+  <% end %>
 <% end %>
+
+<div id="hotels"></div>
 
 <h2>gmap</h2>
 
@@ -16,91 +103,113 @@
   width: 600px;
 }
 </style>
-
 <script>
-let map
-let hotels = <%= raw @hotels.map { |hotel| {lat: hotel.latitude, lng: hotel.longitude, title: hotel.name} }.to_json %>;
-let venues = <%= raw @venues.map { |venue| {lat: venue.latitude, lng: venue.longitude, title: venue.name} }.to_json %>;
-function initMap(){
-  geocoder = new google.maps.Geocoder()
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7828, lng:-73.9653},
-    zoom: 12,
+ $(document).ready(function() {
+  $('#searchInput').click(function() {
+    $('#regionModal').modal('show');
   });
 
-  // ホテルの位置にピンを追加
-  hotels.forEach(function(hotel) {
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(hotel.lat, hotel.lng),
-      map: map,
-      title: hotel.title
+  $('#regionModal .list-group-item').click(function() {
+    var selectedRegionId = $(this).data('region-id');
+    // Ajaxリクエストを使用して都道府県リストを取得
+    $.get('/prefectures_for_region', { region_id: selectedRegionId }, function(prefectures) {
+      $('#prefectureSelect').empty(); // 以前の選択肢をクリア
+      $.each(prefectures, function(index, prefecture) {
+        $('#prefectureSelect').append(new Option(prefecture.name, prefecture.id));
+      });
+      $('#regionModal').modal('hide');
+      $('#prefectureModal').modal('show');
+    });
+  });
+  $('#prefectureModal .btn-primary').click(function() {
+    var selectedPrefectureId = $('#prefectureSelect').val();
+    // Ajaxリクエストを使用して会場リストを取得
+    $.get('/venues_for_prefecture', { prefecture_id: selectedPrefectureId }, function(venues) {
+      $('#venueSelect').empty(); // 以前の選択肢をクリア
+      $.each(venues, function(index, venue) {
+        $('#venueSelect').append(new Option(venue.name, venue.id));
+      });
+      $('#venueModal').modal('show');  //会場選択モーダルを表示
     });
   });
 
-// 会場の位置にピンを追加
-  venues.forEach(function(venue) {
-    var venueMarker = new google.maps.Marker({
-      position: new google.maps.LatLng(venue.lat, venue.lng),
-      map: map,
-      title: venue.title
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  // 検索フォームの要素を取得
-  var searchForm = document.getElementById('searchForm');
-
-  // 検索フォームの送信イベントを検知
-  searchForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // デフォルトの送信動作をキャンセル
-
-    // 会場セレクトボックスの要素を取得
-    var venueSelect = document.getElementById('venueSelect');
-    var selectedVenueId = venueSelect.value; // 選択された会場のID
-
-    // 会場の座標を取得
-    var selectedVenue = venues.find(function(venue) {
-      return venue.id === parseInt(selectedVenueId, 10);
-    });
-
-    if (selectedVenue) {
-      // マップの中心を更新
-      map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
-    };
-
-
-
-    if (selectedVenue) {
-      // マップの中心を更新
-      map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
-    }
+  $('#venueModal .btn-primary').click(function() {
+    var selectedVenue = $('#venueSelect').val();
+    $('#searchInput').val($('#venueSelect option:selected').text());
   });
 });
-
-
-let geocoder
-
-function codeAddress(){
-  let inputAddress = document.getElementById('address').value;
-
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      alert('該当する結果がありませんでした：' + status);
-    }
-  });
-}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
+<script>
+async function searchVenues() {
+  const venueVal = document.getElementById("searchInput").value
+  const response = await fetch(`/hotels.json?venue_name=${venueVal}`).then((res) => res.json()).catch(error => console.error(error))
+  if (response.data) {
+    console.log(response.data.hotels)
+    const hotels = response.data.hotels
+    let ele = document.getElementById('hotels');
 
-<!--script src="https://maps.googleapis.com/maps/api/js?key=pi/js?key=<%#= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
+      hotels.forEach((hotel) => {
+        ele.innerHTML += `
+          <a href=${`/hotels/${hotel.id}`}>${hotel.name}</a>
+          <div>${hotel.introduction}</div>
+        `;
+        　　// var hotelsEle = `
+          //         <div>
+          //         ${hotel.name}
+          //         </div>
+          //       `
+       // ele.after(hotelsEle)
+      });
+    const venue = response.data.venue
+     geocoder = new google.maps.Geocoder()
+
+      let map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: Number(venue.latitude), lng: Number(venue.longitude)},
+        zoom: 12,
+      });
+
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(venue.latitude, venue.longitude),
+        map
+      });
+
+  }
+}
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   // 検索フォームの要素を取得
+//   var searchForm = document.getElementById('searchForm');
+
+//   // 検索フォームの送信イベントを検知
+//   searchForm.addEventListener('submit', function(event) {
+//     event.preventDefault(); // デフォルトの送信動作をキャンセル
+//   console.log('test')
+//     // 会場セレクトボックスの要素を取得
+//     var venueSelect = document.getElementById('venueSelect');
+//     var selectedVenueId = venueSelect.value; // 選択された会場のID
+
+
+//     // 会場の座標を取得
+//     var selectedVenue = venues.find(function(venue) {
+//       return venue.id === parseInt(selectedVenueId, 10);
+//     });
+
+//     if (selectedVenue) {
+//       // マップの中心を更新
+//       map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
+//     };
+
+//     //if (selectedVenue) {
+//       // マップの中心を更新
+//       //map.setCenter(new google.maps.LatLng(selectedVenue.lat, selectedVenue.lng));
+//     //}
+//   });
+// });
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>" async defer></script>
+
+
 
 
 
