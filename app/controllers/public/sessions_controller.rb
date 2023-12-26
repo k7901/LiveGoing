@@ -13,7 +13,7 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
-   protected
+   private
 
   def user_state
     user = User.find_by(email: params[:user][:email])
@@ -24,6 +24,9 @@ class Public::SessionsController < Devise::SessionsController
       redirect_to new_user_registration_path
     end
   end
+
+   protected
+
 
    def configure_sign_in_params
      devise_parameter_sanitizer.permit(:sign_in, keys: [:email])

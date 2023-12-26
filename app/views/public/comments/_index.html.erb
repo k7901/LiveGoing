@@ -1,15 +1,14 @@
-<table>
+<table class = "table hover">
   <div class='col-8 offset-md-1'>
   <% hotel.comments.each do |comment| %>
     <tr>
       <td>
-        <%#= image_tag comment.user.get_profile_image(50,50) %><br>
-        <%= comment.user.name %>
+        <%= comment.user.last_name %> <%= comment.user.first_name %>
       </td>
       <td>
         <%= comment.comment %>
       </td>
-      <td><%= link_to "削除する", hotel_comment_path(hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", data: { confirm: '本当に消しますか？' }, remote: true %></td>
+      <td><%= link_to "削除する", hotel_comment_path(hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", data: { confirm: '本当に削除しますか？' }, remote: true %></td>
     </tr>
   <% end %>
 </table>

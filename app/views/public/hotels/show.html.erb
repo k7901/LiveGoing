@@ -36,31 +36,7 @@
             　</tr>
             <% end %>
         </table>
-        <table class = "table hover">
-          <thead>
-            <tr>
-              <th>ユーザー</th>
-              <th>コメント</th>
-              <th>レビュー</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @hotel.comments.each do |comment| %>
-            <tr>
-              <td>
-                <%= comment.user.last_name %><%= comment.user.first_name %>
-              </td>
-              <td>
-                <%= comment.comment %>
-              </td>
-              <td>
-                <%= render 'public/comments/static_rate', comment: comment %>
-            　</td>
-              <td><%= link_to "Destroy", hotel_comment_path(@hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+          <%= render 'public/comments/index', hotel: @hotel, comment: @comment %>
         <table>
           <%= render 'public/comments/form', hotel: @hotel, comment: @comment %>
         </table>

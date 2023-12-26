@@ -3,7 +3,6 @@ class Public::HotelsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        #@hotels = Hotel.all
       if hotel_search_params.present?
       @search_params = hotel_search_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
       @hotels = Hotel.search(@search_params)  #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している
@@ -13,12 +12,8 @@ class Public::HotelsController < ApplicationController
       format.json do
         @venue = Venue.find_by(name: params[:venue_name])
         @hotels = @venue.hotels
-        #@venues = Venue.all
       end
     end
-
-    #@venues = Venue.all
-
   end
 
   def show
