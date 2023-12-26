@@ -15,6 +15,16 @@ class Public::SessionsController < Devise::SessionsController
 
    protected
 
+  def user_state
+    user = User.find_by(email: params[:user][:email])
+    Rails.logger.debug("User: #{user.inspect}")
+    return if user.nil?
+    return unless user.valid_password?(params[:user][:password])
+    if customer.is_active == false
+      redirect_to new_user_registration_path
+    end
+  end
+
    def configure_sign_in_params
      devise_parameter_sanitizer.permit(:sign_in, keys: [:email])
    end

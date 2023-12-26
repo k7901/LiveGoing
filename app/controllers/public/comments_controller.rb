@@ -7,7 +7,6 @@ class Public::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.hotel_id = @hotel.id
     if @comment.save
-
     redirect_back fallback_location: root_path
     else
       # 保存が失敗した場合の処理

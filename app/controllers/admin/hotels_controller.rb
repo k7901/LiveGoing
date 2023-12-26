@@ -10,7 +10,8 @@ class Admin::HotelsController < ApplicationController
     if @hotel.save
       redirect_to admin_hotels_path
     else
-       redirect_to :back
+     @hotels = Hotel.all # ホテルの保存に失敗した場合に必要
+     render :index
     end
   end
 

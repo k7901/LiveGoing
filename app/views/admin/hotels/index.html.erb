@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to admin_hotel_path(hotel.id) do %><%= hotel.name %><% end %></td>
         <td><%= hotel.address %></td>
-        <td><%= hotel.venue.try(:name) %></td>
+        <td><%= hotel.venue.try(:name)|| "会場情報がありません" %></td>
         <td><% hotel.services.each do |service|%>
             <%= service.name %>
           <% end %>
