@@ -21,7 +21,7 @@ class Public::HotelsController < ApplicationController
 
   def hotel_search_params
     # 安全に検索パラメータを許可する（必要に応じて）
-    params.require(:search).permit(:venue, :guest, :amount, :star)
+    params.require(:search).permit(:venue, :guest, :amount)
   end
 
 end
