@@ -1,4 +1,51 @@
-<%= form_with model: [hotel, hotel_comment], local: false do |f| %>
+<%= form_with model: [hotel, comment], local: true do |f| %>
   <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに", class: "w-100", id: "comment_textarea" %>
+  <%#= f.hidden_field :hotel_id, value: hotel.id %>
+
+  <% if comment.id.nil? %>
+    <div class="form-group" id="star">
+
+      <%= f.hidden_field :star, id: :comment_star, class: 'form-control' %>
+      <div id="post_raty"></div>
+    </div>
+    <script>
+      $(document).on('turbolinks:load', function() {
+        let elem = document.querySelector('#post_raty');
+        if (elem == null) return;
+        elem.innerHTML = "";
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          scoreName: 'comment[star]',
+          click: function(score, evt) {
+            // 星評価が選択されたときに隠しフィールドの値を更新
+            document.getElementById('comment_star').value = score;
+          }
+        };
+        raty(elem, opt);
+      });
+
+    </script>
+
+  <% else %>
+    <div class="form-group">
+      <%= render "static_rate", comment: comment %>
+    </div>
+  <% end %>
   <%= f.submit "送信" %>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

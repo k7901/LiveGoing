@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.integer "user_id", null: false
     t.integer "hotel_id", null: false
     t.text "comment", null: false
-    t.string "star", null: false
+    t.float "star", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 2023_12_11_151413) do
     t.string "name", null: false
     t.text "introduction", null: false
     t.string "address", null: false
-    t.string "star"
     t.decimal "latitude", null: false
     t.decimal "longitude", null: false
     t.time "check_in_time_start", null: false

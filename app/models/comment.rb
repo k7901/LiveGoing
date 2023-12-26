@@ -1,5 +1,8 @@
 class Comment < ApplicationRecord
-   belongs_to :customer
-   belongs_to :hote
+   belongs_to :user
+   belongs_to :hotel
+
+   validates :comment, presence: true
+   validates :star, presence: true
 
 end
