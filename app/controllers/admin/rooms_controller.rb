@@ -39,7 +39,7 @@ class Admin::RoomsController < ApplicationController
     @hotel = Hotel.find(params[:hotel_id])
     @room = @hotel.rooms.find(params[:id])
     @room.destroy
-    redirect_to admin_hotel_room_path(@hotel,@room)
+      redirect_to admin_hotels_path
   end
 
    private

@@ -1,12 +1,12 @@
 <div class = "container">
   <div class = "row">
-    <div class = "col-4">
-      <div><%= image_tag @hotel.get_image(500,500) %></div>
+    <div class = "col-5">
+      <div><%= image_tag @hotel.get_image(400,400) %></div>
     </div>
     <% @hotel.images.drop(1).each do |image| %>
       <div><%= image_tag image.variant(resize_to_limit: [250, 200]).processed %></div>
     <% end %>
-    <div class = "col-8">
+    <div class = "col-7">
       <div class = "row my-lg-1">
         <div class = col-3 , style="color: #48120E">
           ホテル名
@@ -36,7 +36,7 @@
           会場
         </div>
         <div class = col-9, style="color: #48120E">
-          <%= @hotel.venue.name %>
+          <%= @hotel.venue.try(:name) || "会場情報がありません" %>
         </div>
       </div>
       <div class = "row my-lg-4", style="color: #48120E">
@@ -74,45 +74,46 @@
         </div>
       </div>
     </div>
-  <div class = "container">
-    <div class = "row my-lg-2 justify-content-center", style="color: #48120E">
-      <div class = "col-md-3">
-        <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
-          <div style="background-color: #bee6d8; border-radius: 5px;">
-            <%= link_to '編集する', edit_admin_hotel_path(@hotel), class: "btn btn-lg" %>
+    <div class = "container">
+      <div class = "row my-lg-2 justify-content-center", style="color: #48120E">
+        <div class = "col-md-3">
+          <div style="border: 2px solid #bee6d8; padding: 2px; border-radius: 5px; text-align: center;">
+            <div style="background-color: #bee6d8; border-radius: 5px;">
+              <%= link_to '編集する', edit_admin_hotel_path(@hotel), class: "btn btn-lg" %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <%= link_to "ルーム新規登録", new_admin_hotel_room_path(hotel_id: @hotel.id), class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
-</div>
-<div class = "container">
-  <div class = "row">
-    <div class = "col-12">
-      <table class = "table table-hover">
-        <thead>
-          <tr>
-            <th>部屋タイプ</th>
-            <th>宿泊可能人数</th>
-            <th>部屋数</th>
-            <th>価格</th>
-            <th>確認事項</th>
-          </tr>
-        </thead>
-        <% @rooms.each do |room| %>
-          <tr>
-            <td><%= link_to admin_hotel_room_path(@hotel, room) do %><%= room.name %><% end %></td>
-            <td><%= room.guest %></td>
-            <td><%= room.amount %></td>
-            <td><%= room.price %></td>
-            <td><%= room.checklist %></td>
-            <td><%= link_to "削除", admin_hotel_room_path(@hotel, room), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
-          </tr>
-        <% end %>
-      </table>
+  <div>
+    <%= link_to "ルーム新規登録", new_admin_hotel_room_path(hotel_id: @hotel.id), class:"btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %>
+  </div>
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-12">
+        <table class = "table table-hover">
+          <thead>
+            <tr>
+              <th>部屋タイプ</th>
+              <th>宿泊可能人数</th>
+              <th>部屋数</th>
+              <th>価格</th>
+              <th>確認事項</th>
+            </tr>
+          </thead>
+          <% @rooms.each do |room| %>
+            <tr>
+              <td><%= link_to admin_hotel_room_path(@hotel, room) do %><%= room.name %><% end %></td>
+              <td><%= room.guest %></td>
+              <td><%= room.amount %></td>
+              <td><%= room.price %></td>
+              <td><%= room.checklist %></td>
+              <td><%= link_to "削除", admin_hotel_room_path(@hotel, room), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn font-bold", style: "background-color: #ffe9a9; color: #1A120B;" %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
   </div>
 </div>

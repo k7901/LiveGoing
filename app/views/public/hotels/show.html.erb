@@ -4,7 +4,7 @@
       <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
         <h2><%= @hotel.name %></h2>
       </div>
-      <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
+      <div class="row ml-5  item-line", style="color:#48120E;">
         <h5><%= @hotel.address %></h5>
       </div>
       <div class="col-4  pt-5">
@@ -14,7 +14,7 @@
         <h4><%= @hotel.introduction %></h4>
       </div>
       <div class="row">
-        <table>
+        <table class = "table hover">
           <thead>
             <tr>
               <th>ルームタイプ</th>
@@ -36,12 +36,19 @@
             　</tr>
             <% end %>
         </table>
-        <table>
+        <table class = "table hover">
+          <thead>
+            <tr>
+              <th>ユーザー</th>
+              <th>コメント</th>
+              <th>レビュー</th>
+            </tr>
+          </thead>
+          <tbody>
           <% @hotel.comments.each do |comment| %>
             <tr>
               <td>
-                  <%#= image_tag comment.user.get_profile_image(50,50) %><br>
-                  <%= comment.user.last_name %><%= comment.user.first_name %>
+                <%= comment.user.last_name %><%= comment.user.first_name %>
               </td>
               <td>
                 <%= comment.comment %>
@@ -52,8 +59,8 @@
               <td><%= link_to "Destroy", hotel_comment_path(@hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %></td>
             </tr>
           <% end %>
+          </tbody>
         </table>
-          <%#= render 'public/comments/index', hotel: @hotel, comment: @comment %>
         <table>
           <%= render 'public/comments/form', hotel: @hotel, comment: @comment %>
         </table>
