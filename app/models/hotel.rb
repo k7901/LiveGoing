@@ -1,9 +1,9 @@
 class Hotel < ApplicationRecord
   has_many :hotel_service_relations
   has_many :services, through: :hotel_service_relations
-  has_many :rooms
-  has_many :comments
-  belongs_to :venue
+  has_many :rooms, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  belongs_to :venue, dependent: :destroy
   has_many_attached :images
 
 

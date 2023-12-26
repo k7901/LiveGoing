@@ -13,17 +13,16 @@
       <div class="row ml-5 mb-5 item-line", style="color:#48120E;">
         <h4><%= @hotel.introduction %></h4>
       </div>
-      <div class="row d-flex">
+      <div class="row">
         <table>
           <thead>
-             <tr>
+            <tr>
               <th>ルームタイプ</th>
               <th>宿泊人数</th>
               <th>確認事項</th>
               <th>料金</th>
             </tr>
           </thead>
-
             <% @hotel.rooms.each do |room| %>
             　<tr>
             　   <td><%= room.name %></td>
@@ -39,9 +38,33 @@
 
         </table>
         <table>
-          
+          <% @hotel.comments.each do |comment| %>
+            <tr>
+              <td>
+                  <%#= image_tag comment.user.get_profile_image(50,50) %><br>
+                  <%= comment.user.last_name %><%= comment.user.first_name %>
+              </td>
+              <td>
+                <%= comment.comment %>
+              </td>
+              <td>
+                <%= render 'public/comments/static_rate', comment: comment %>
+            　</td>
+              <td><%= link_to "Destroy", hotel_comment_path(@hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %></td>
+            </tr>
+          <% end %>
+        </table>
+          <%#= render 'public/comments/index', hotel: @hotel, comment: @comment %>
+        <table>
+          <%= render 'public/comments/form', hotel: @hotel, comment: @comment %>
         </table>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+

@@ -5,7 +5,6 @@ class CreateHotels < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.text :introduction, null: false
       t.string :address, null: false
-      t.string :star
       t.decimal :latitude, null: false
       t.decimal :longitude, null: false
       t.time :check_in_time_start, null: false
