@@ -16,7 +16,6 @@ class Public::CommentsController < ApplicationController
     end
   end
 
-
   def destroy
     Comment.find(params[:id]).destroy
     redirect_back fallback_location: root_path

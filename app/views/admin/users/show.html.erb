@@ -1,57 +1,46 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <div class="clip-box-b">
-        <div class="col-9 mb-5 mt-3">
-          <h4 class="text-center", style="color: #48120E">
-            <i class="fa-solid fa-clover" style="color:  #54917f;"></i>
-              <%= @user.last_name %><%= @user.first_name %>さんの会員詳細
-            <i class="fa-solid fa-clover" style="color:  #54917f;"></i>
-          </h4>
-        </div>
-        <div class="row">
-          <div class="col-12 d-flex align-items-center pl-5">
-            <table class="table table-borderless" style="color: #48120E;">
-              <tr>
-                <th>会員ID</td>
-                <td><%= @user.id %></td>
-              </tr>
-              <tr>
-                <th>氏名</td>
-                <td><%= @user.last_name %><%= @user.first_name %></td>
-              </tr>
-                <th>メールアドレス</th>
-                <td><%= @user.email %></td>
-              </tr>
-              <tr>
-                <th>会員ステータス</th>
-                <td>
-                  <% if @user.is_active == true %>
-                    <p class = "text-success">有効</p>
-                  <% else%>
-                  　<p class = "text-secondary">退会済</p>
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td class="d-flex justify-content-end">
-                  <div style="border: 2px solid #ffe9a9; padding: 2px; border-radius: 5px; text-align: center;">
-                    <div style="background-color: #ffe9a9; border-radius: 5px;">
-                      <%= link_to "編集する", edit_admin_user_path, class:"btn" %>
-                    </div>
-                  </div>
-                  <div style="border: 2px solid #bee6df; padding: 2px; border-radius: 5px; text-align: center;">
-                    <div style="background-color: #bee6df; border-radius: 5px;">
-                      <%= link_to "レビュー一覧を見る", admin_root_path, class:"btn" %>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div class="col-12  mb-5 mt-3">
+      <h4 class="text-center", style="color: #48120E">
+        <%= @user.last_name %><%= @user.first_name %>さんの会員詳細
+      </h4>
+      <table class="table table-borderless" style="color: #48120E;">
+        <tr>
+          <td>会員ID</td>
+          <td><%= @user.id %></td>
+        </tr>
+        <tr>
+          <td>氏名</td>
+          <td><%= @user.last_name %><%= @user.first_name %></td>
+        </tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <td>
+            <% if @user.is_active == true %>
+              <p class = "text-success">有効</p>
+            <% else%>
+            　<p class = "text-secondary">退会済</p>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td class="d-flex justify-content-center">
+            <div style="border: 2px solid #ffe9a9; padding: 2px; border-radius: 5px; text-align: center;">
+              <div style="background-color: #ffe9a9; border-radius: 5px;">
+                <%= link_to "編集する", edit_admin_user_path, class:"btn" %>
+              </div>
+            </div>
+            <div style="border: 2px solid #bee6df; padding: 2px; border-radius: 5px; text-align: center;">
+              <div style="background-color: #bee6df; border-radius: 5px;">
+                <%= link_to "レビュー一覧を見る", admin_root_path, class:"btn" %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

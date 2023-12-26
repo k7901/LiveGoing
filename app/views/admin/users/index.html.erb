@@ -5,8 +5,7 @@
           会員一覧
       </h2>
     </div>
-    <div class="pt-5">
-      <table class="table", style="color: #4d382e;">
+      <table class= "table table-hover">
         <thead>
           <tr>
             <th>会員ID</th>
@@ -18,7 +17,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.id %></td>
-            <td><%= link_to admin_customer_path(customer.id) do %>
+            <td><%= link_to admin_user_path(user.id) do %>
                 <%= user.last_name %><%= user.first_name %>
                 <% end %>
             </td>
@@ -33,9 +32,6 @@
           </tr>
         <% end %>
       </table>
-    </div>
-    <div class="all__paginate">
       <%= paginate @users %>
-    </div>
   </div>
-
+</div>

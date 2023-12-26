@@ -1,12 +1,12 @@
-<h1>レビュー一覧</h1>
+<h2><%= @user.last_name %><%= @user.first_name %>さんのレビュー一覧</h2>
 
 <table class = "table table-hover">
   <thead>
     <tr>
       <th>レビューID</th>
-      <th>ユーザー名</th>
       <th>ホテル</th>
       <th>評価</th>
+      <th>コメント</th>
       <th>投稿日時</th>
     </tr>
   </thead>
@@ -14,18 +14,14 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.id %></td>
-        <td><%= link_to admin_user_comments_path(comment.user) do %>
-          <%= comment.user.last_name %><%= comment.user.first_name %><% end %></td>
         <td><%= comment.hotel.name %></td>
         <td><%= comment.star %><%= render 'public/comments/static_rate', comment: comment %></td>
+        <td><%= comment.comment %></td>
         <td><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+        <td><%= link_to "削除", admin_user_comment_path(@user,comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger float-end" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <%= paginate @comments %>
-
-
-
-
