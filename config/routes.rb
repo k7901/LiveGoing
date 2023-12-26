@@ -14,13 +14,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update] do
+       resources :comments,only: [:index, :destroy]
+    end
     resources :hotels do
       resources :rooms, except: [:index]
     end
     resources :venues, except: [:show]
     resources :services, except: [:show]
-    resources :reviews, except:[:new, :create, :destroy]
   end
 
   scope module: :public do
