@@ -20,7 +20,7 @@ class Public::SessionsController < Devise::SessionsController
     Rails.logger.debug("User: #{user.inspect}")
     return if user.nil?
     return unless user.valid_password?(params[:user][:password])
-    if customer.is_active == false
+    if user.is_active == false
       redirect_to new_user_registration_path
     end
   end
