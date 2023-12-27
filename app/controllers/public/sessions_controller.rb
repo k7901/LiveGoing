@@ -10,7 +10,7 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def after_sign_up_path_for(resource)
-    root_path
+    hotels_path
   end
 
    private
@@ -26,7 +26,6 @@ class Public::SessionsController < Devise::SessionsController
   end
 
    protected
-
 
    def configure_sign_in_params
      devise_parameter_sanitizer.permit(:sign_in, keys: [:email])
