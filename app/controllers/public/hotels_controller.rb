@@ -20,6 +20,7 @@ class Public::HotelsController < ApplicationController
     @hotel = Hotel.find(params[:id])
     @rooms = @hotel.rooms.all
     @room_prices = {}
+
   # 各部屋の価格を計算するロジック
     @rooms.each do |room|
       @room_prices[room.id] = room.price

@@ -3,12 +3,15 @@
   <% hotel.comments.each do |comment| %>
     <tr>
       <td>
-        <%= comment.user.last_name %> <%= comment.user.first_name %>
+        <%= comment.user.last_name %><%= comment.user.first_name %>
       </td>
       <td>
         <%= comment.comment %>
       </td>
+      <td><%= render 'public/comments/static_rate',comment: comment %></td>
+      <% if comment.user == current_user %>
       <td><%= link_to "削除する", hotel_comment_path(hotel, comment), method: :delete, class: "btn btn-sm btn-danger float-end", data: { confirm: '本当に削除しますか？' }, remote: true %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
