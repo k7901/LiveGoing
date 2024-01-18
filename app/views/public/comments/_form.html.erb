@@ -1,6 +1,5 @@
 <%= form_with model: [hotel, comment], local: false do |f| %>
   <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに", class: "w-100", id: "comment_textarea" %>
-  <%#= f.hidden_field :hotel_id, value: hotel.id %>
 
   <% if comment.id.nil? %>
     <div class="form-group" id="star">
